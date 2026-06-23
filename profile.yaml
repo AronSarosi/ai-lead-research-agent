@@ -1,0 +1,29 @@
+# Your profile - this is the voice every draft is written in.
+# Edit freely. Nothing here is secret (keys live in .env).
+
+name: Aron Sarosi
+
+# One line on what you do. Plain, not salesy.
+one_line_offer: >
+  I build custom AI tools and automations that hand off the repetitive work -
+  research, reporting, document handling - so small teams get their time back.
+
+# Links you're happy to drop into a message (at most one is used per draft).
+demo_links:
+  - "aiwitharon.com"
+  - "AI Report Generator demo: aiwitharon.com (see the work section)"
+
+# How you sound. Be specific - this steers the writing.
+tone_notes: >
+  Warm and direct, like a smart friend giving advice. Short sentences, one
+  thought per line. British English (colour, organise, programme). The odd dry
+  aside in brackets. Confident but not arrogant. No corporate filler, no hype
+  words, no em-dashes, and never mention AI as a gimmick.
+
+# A light credibility line the draft may reference if it helps (optional).
+credibility: >
+  10 years in data science and AI across global banks and consultancies
+  (ex-Legal & General, Deloitte, EY).
+
+# How you sign off.
+sign_off: "Aron"

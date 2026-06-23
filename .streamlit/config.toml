@@ -1,0 +1,15 @@
+# Theme matched to aiwitharon.com: warm sand base, terracotta accent, warm
+# charcoal ink. Fonts (Newsreader + Inter) and finer styling are layered on top
+# in theme.py. Colours here drive the widgets Streamlit themes automatically
+# (buttons, slider, focus rings, table headers).
+
+[theme]
+base = "light"
+primaryColor = "#B5532E"            # terracotta accent
+backgroundColor = "#F2ECE3"         # warm sand
+secondaryBackgroundColor = "#FBF8F2"  # soft card surface
+textColor = "#5B544B"               # warm grey body (headings overridden darker in CSS)
+borderColor = "#E0D8CB"             # hairline
+font = "sans-serif"
+baseRadius = "0.6rem"
+baseFontSize = 17                    # the /warm app scales the whole UI up to 17px

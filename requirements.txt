@@ -1,0 +1,16 @@
+# Core
+streamlit>=1.40
+python-dotenv>=1.0
+pyyaml>=6.0
+pandas>=2.2
+pydantic>=2.7
+
+# Agent
+langgraph>=0.2.30
+langchain>=0.3
+langchain-openai>=0.2
+tavily-python>=0.5
+
+# Optional tracing (safe to install; only active when LANGFUSE_* keys are set)
+# Pinned to v2 - that's the langfuse.callback CallbackHandler API used in agent/llm.py
+langfuse>=2.50,<3

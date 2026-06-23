@@ -1,0 +1,18 @@
+# A ready-to-run sample ICP. The UI form is pre-filled from this file, so you
+# can hit "Run research" straight away and adjust from there.
+
+industry: "Boutique recruitment agencies"
+company_size: "10-50 employees"
+location: "London, UK"
+keywords: "tech recruitment, candidate sourcing, manual admin, spreadsheets, reporting"
+
+offer: >
+  I build custom AI tools that automate the repetitive parts of recruitment -
+  CV screening, candidate research, and writing up client reports - so
+  consultants spend more time placing and less time on admin.
+
+num_companies: 5
+
+# Optional: list specific companies (one per line) to research directly and
+# skip discovery. Leave empty to let the agent find matches from the ICP above.
+manual_companies: []
