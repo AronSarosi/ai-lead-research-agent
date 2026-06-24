@@ -14,12 +14,14 @@ from agent.config import load_profile, load_sample_icp, load_settings
 from agent.export import dataframe_to_csv_bytes, results_to_dataframe
 from agent.graph import discover_companies, research_company
 from agent.schemas import ICP
+from legal import PRIVACY_MD, TERMS_MD
 from theme import (
     inject_theme,
     render_demo,
     render_footer,
     render_group,
     render_header,
+    render_legal_page,
     render_step,
     render_stepper,
 )
@@ -28,8 +30,18 @@ from theme import (
 # to stay polite to the LLM and search APIs (and to avoid rate limits).
 MAX_WORKERS = 4
 
-st.set_page_config(page_title="AI Lead Research Agent", layout="wide")
+st.set_page_config(page_title="AI Lead Research Agent", page_icon="🎯", layout="wide")
 inject_theme()
+
+# Routing: ?page=terms and ?page=privacy render as their own themed pages, opened in
+# a new tab from the footer, on the same warm background as the main app.
+_page = st.query_params.get("page")
+if _page in ("terms", "privacy"):
+    if _page == "terms":
+        render_legal_page("Terms of Use", TERMS_MD)
+    else:
+        render_legal_page("Privacy Policy", PRIVACY_MD)
+    st.stop()
 
 settings = load_settings()
 profile = load_profile()

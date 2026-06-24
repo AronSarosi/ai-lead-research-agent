@@ -76,15 +76,19 @@ def get_callbacks(settings: Optional[Settings] = None) -> List[Any]:
     if not settings.langfuse_enabled:
         return []
     try:
-        from langfuse.callback import CallbackHandler
+        from langfuse import Langfuse
+        from langfuse.langchain import CallbackHandler
 
-        return [
-            CallbackHandler(
-                public_key=settings.langfuse_public_key,
-                secret_key=settings.langfuse_secret_key,
-                host=settings.langfuse_host,
-            )
-        ]
+        # In langfuse v3 the CallbackHandler takes no keys; it uses the Langfuse
+        # client, which reads LANGFUSE_PUBLIC_KEY / LANGFUSE_SECRET_KEY /
+        # LANGFUSE_HOST from the environment. Initialise the client explicitly
+        # with our settings first, then hand back a keyless handler.
+        Langfuse(
+            public_key=settings.langfuse_public_key,
+            secret_key=settings.langfuse_secret_key,
+            host=settings.langfuse_host,
+        )
+        return [CallbackHandler()]
     except Exception:
         # Tracing is best-effort. Never let it break a run.
         return []

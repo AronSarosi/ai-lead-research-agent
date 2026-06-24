@@ -173,33 +173,85 @@ _CSS = f"""
   background: {ACCENT}; flex: none;
 }}
 
-/* Demonstration: ideal client -> arrow + prompt -> drafted outreach.
-   Fixed-width blocks + one uniform gap == identical space on BOTH sides. */
-/* Three columns + arrow on ONE row at desktop width. Widths + gaps are sized so
-   the strip never exceeds the content area (it falls back to wrapping below ~900px). */
-.demo {{display:flex; align-items:center; justify-content:center; gap:2.2rem; flex-wrap:wrap; margin:2.2rem auto 0.5rem;}}
-.demo-col {{flex:0 0 auto; width:320px; display:flex; flex-direction:column; align-items:center; text-align:center;}}
-.demo-cap {{letter-spacing:.08em; font-size:.9rem; color:{INK_MUTE}; font-weight:700; margin-bottom:.55rem;}}
-.demo-mid {{display:flex; flex-direction:column; align-items:center; gap:.7rem; flex:0 0 auto; width:200px;}}
-.demo-prompt {{background:{SURFACE}; border:1px solid {LINE}; border-radius:11px; padding:.6rem .8rem; font-size:.92rem; color:{INK_DIM}; text-align:left; line-height:1.42;}}
+/* Demonstration: ideal client -> prompt + arrow -> drafted outreach.
+   Three columns on one row at desktop width, centred on a quiet sand strip.
+   Below ~860px the columns stack vertically and the arrow turns downward. */
+.demo {{
+  display:flex; align-items:stretch; justify-content:center;
+  gap:1.6rem; flex-wrap:wrap;
+  margin:2.4rem auto 0.5rem; max-width:1040px;
+}}
+.demo-col {{
+  flex:1 1 300px; min-width:280px; max-width:340px;
+  display:flex; flex-direction:column;
+}}
+.demo-cap {{
+  letter-spacing:.1em; font-size:.78rem; color:{INK_MUTE};
+  font-weight:700; text-transform:uppercase;
+  margin:0 0 .7rem; text-align:center;
+}}
+
+/* Middle column: the short prompt sat above the terracotta arrow. */
+.demo-mid {{
+  flex:0 0 auto; align-self:center;
+  display:flex; flex-direction:column; align-items:center;
+  gap:1rem; width:200px; padding:0 .4rem;
+}}
+.demo-prompt {{
+  background:{SURFACE}; border:1px solid {LINE}; border-radius:12px;
+  padding:.8rem 1rem; font-size:.94rem; color:{INK_DIM};
+  text-align:center; line-height:1.5; font-style:italic;
+}}
 .straight-arrow {{line-height:0;}}
+.straight-arrow.down {{display:none;}}
 
-/* Left card: the ideal client profile. */
-.icpcard {{width:300px; margin:0 auto; background:{WHITE}; border:1px solid {LINE}; border-radius:9px; box-shadow:0 10px 26px rgba(34,30,25,.18); padding:.7rem .8rem; text-align:left;}}
-.icp-tag {{display:inline-block; font-size:.78rem; font-weight:700; color:{WHITE}; background:{ACCENT}; border-radius:3px; padding:.06rem .45rem; margin-bottom:.55rem; letter-spacing:.04em;}}
-.icp-row {{display:flex; justify-content:space-between; gap:.6rem; font-size:.9rem; padding:.28rem 0; border-bottom:1px solid {LINE}; line-height:1.3;}}
-.icp-row:last-child {{border-bottom:none;}}
-.icp-row .k {{color:{INK_MUTE}; font-weight:600;}}
-.icp-row .v {{color:{INK}; text-align:right;}}
+/* Left card: the ideal client profile - clean key/value rows. */
+.icpcard {{
+  flex:1 1 auto; background:{WHITE}; border:1px solid {LINE};
+  border-radius:14px; box-shadow:{CARD_SHADOW};
+  padding:1.1rem 1.2rem; text-align:left;
+}}
+.icp-tag {{
+  display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.08em;
+  color:{ACCENT}; background:rgba(181,83,46,.1);
+  border-radius:6px; padding:.2rem .55rem; margin-bottom:.85rem;
+}}
+.icp-row {{
+  display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
+  font-size:.92rem; padding:.5rem 0; border-bottom:1px solid {LINE}; line-height:1.4;
+}}
+.icp-row:last-child {{border-bottom:none; padding-bottom:0;}}
+.icp-row .k {{color:{INK_MUTE}; font-weight:600; flex:0 0 auto;}}
+.icp-row .v {{color:{INK}; text-align:right; font-weight:500;}}
 
-/* Right card: the drafted outreach message. */
-.msg-thumb {{width:300px; margin:0 auto; background:{WHITE}; border:1px solid {LINE}; border-radius:9px; box-shadow:0 10px 26px rgba(34,30,25,.18); padding:.7rem .8rem; text-align:left;}}
-.msg-to {{font-size:.84rem; color:{INK_MUTE}; line-height:1.4; margin-bottom:.1rem;}}
-.msg-to b {{color:{INK};}}
-.msg-subj {{font-family:'Newsreader',Georgia,serif; color:{INK}; font-weight:600; font-size:1.02rem; line-height:1.22; margin:.35rem 0 .55rem 0;}}
-.msg-body {{font-size:.9rem; color:{INK_DIM}; line-height:1.5;}}
-.msg-body b {{color:{ACCENT_DEEP};}}
-.msg-sign {{margin-top:.55rem; font-size:.9rem; color:{INK}; font-weight:600;}}
+/* Right card: the drafted outreach message - roomy and fully readable. */
+.msg-thumb {{
+  flex:1 1 auto; background:{WHITE}; border:1px solid {LINE};
+  border-radius:14px; box-shadow:{CARD_SHADOW};
+  padding:1.1rem 1.2rem 1.2rem; text-align:left;
+}}
+.msg-to {{
+  font-size:.86rem; color:{INK_MUTE}; line-height:1.45;
+  padding-bottom:.7rem; border-bottom:1px solid {LINE};
+}}
+.msg-to b {{color:{INK}; font-weight:600;}}
+.msg-subj {{
+  font-family:'Newsreader',Georgia,serif; color:{INK}; font-weight:600;
+  font-size:1.12rem; line-height:1.3; margin:.85rem 0 .75rem;
+}}
+.msg-body {{font-size:.95rem; color:{INK_DIM}; line-height:1.65;}}
+.msg-body p {{margin:0 0 .6rem; font-size:.95rem;}}
+.msg-body p:last-child {{margin-bottom:0;}}
+.msg-body b {{color:{ACCENT_DEEP}; font-weight:600;}}
+.msg-sign {{margin-top:.85rem; font-size:.95rem; color:{INK}; font-weight:600;}}
+
+/* Stack the strip vertically on narrow screens; flip the arrow downward. */
+@media (max-width: 860px) {{
+  .demo-mid {{width:100%; order:0;}}
+  .straight-arrow.across {{display:none;}}
+  .straight-arrow.down {{display:block;}}
+  .demo-col {{max-width:420px; width:100%;}}
+}}
 
 /* Two-step progress stepper: pills "1 Describe" / "2 Review". */
 .stepper {{
@@ -270,6 +322,35 @@ _CSS = f"""
   font-size: 0.86rem;
   margin-top: 0.6rem;
 }}
+
+/* Subtle muted legal links at the very bottom, separated by a dot. */
+.footer .legal {{
+  margin-top: 1.1rem;
+  font-size: 0.84rem;
+}}
+.footer .legal a.footlink {{
+  color: {INK_MUTE} !important;
+  text-decoration: none !important;
+}}
+.footer .legal a.footlink:hover {{
+  color: {ACCENT} !important;
+}}
+.footer .legal .footsep {{ color: {LINE}; margin: 0 0.5rem; }}
+
+/* Standalone themed policy pages (?page=terms / ?page=privacy). */
+.policy-title {{
+  font-family: 'Newsreader', Georgia, serif;
+  color: {INK};
+  font-weight: 500;
+  font-size: 2.4rem;
+  margin: 0.6rem 0 0.3rem;
+}}
+.policy-back {{
+  color: {INK_MUTE};
+  text-decoration: none;
+  font-size: 0.95rem;
+}}
+.policy-back:hover {{ color: {ACCENT}; text-decoration: underline; }}
 </style>
 """
 
@@ -300,12 +381,19 @@ def render_header() -> None:
     )
 
 
-# One clean, straight arrow pointing input -> output. Nothing overlaps it.
-_STRAIGHT_ARROW = (
-    '<svg class="straight-arrow" width="150" height="30" viewBox="0 0 150 30" '
+# One clean terracotta arrow, input -> output. The "across" form points right on
+# desktop; the "down" form points down when the strip stacks on narrow screens.
+_ARROW_ACROSS = (
+    '<svg class="straight-arrow across" width="120" height="26" viewBox="0 0 120 26" '
     'fill="none" stroke="#B5532E" stroke-width="5" stroke-linecap="round" '
-    'stroke-linejoin="round"><path d="M6 15 L132 15"/>'
-    '<path d="M132 15 L116 6"/><path d="M132 15 L116 24"/></svg>'
+    'stroke-linejoin="round"><path d="M6 13 L104 13"/>'
+    '<path d="M104 13 L89 5"/><path d="M104 13 L89 21"/></svg>'
+)
+_ARROW_DOWN = (
+    '<svg class="straight-arrow down" width="26" height="56" viewBox="0 0 26 56" '
+    'fill="none" stroke="#B5532E" stroke-width="5" stroke-linecap="round" '
+    'stroke-linejoin="round"><path d="M13 6 L13 46"/>'
+    '<path d="M13 46 L5 33"/><path d="M13 46 L21 33"/></svg>'
 )
 
 
@@ -315,7 +403,7 @@ def render_demo() -> None:
         f"""
         <div class="demo">
           <div class="demo-col">
-            <div class="demo-cap">YOUR IDEAL CLIENT</div>
+            <div class="demo-cap">Your ideal client</div>
             <div class="icpcard">
               <span class="icp-tag">ICP</span>
               <div class="icp-row"><span class="k">Industry</span><span class="v">Recruitment</span></div>
@@ -326,22 +414,26 @@ def render_demo() -> None:
           </div>
           <div class="demo-mid">
             <div class="demo-prompt">&ldquo;Find clients like this and write the first message.&rdquo;</div>
-            {_STRAIGHT_ARROW}
+            {_ARROW_ACROSS}
+            {_ARROW_DOWN}
           </div>
           <div class="demo-col">
-            <div class="demo-cap">DRAFTED OUTREACH</div>
+            <div class="demo-cap">Drafted outreach</div>
             <div class="msg-thumb">
-              <div class="msg-to">To: <b>Priya Shah</b>, Founder at Northbridge Talent</div>
+              <div class="msg-to">To: <b>Sarah Bennett</b><br>Founder at Northbridge Talent</div>
               <div class="msg-subj">Cutting your team's admin, not your headcount</div>
-              <div class="msg-body">Hi Priya, I saw Northbridge is scaling its London desk
-              fast. Most recruiters that size lose hours a week to manual CV screening and
-              follow-ups. I build <b>AI automation that quietly handles that</b> so your
-              consultants stay on the phone. Worth a quick look?</div>
+              <div class="msg-body">
+                <p>Hi Sarah, I saw Northbridge is scaling its London desk fast.</p>
+                <p>Most recruiters your size lose hours a week to manual CV screening and
+                follow-ups. I build <b>AI automation that quietly handles that</b>, so your
+                consultants stay on the phone.</p>
+                <p>Worth a quick look?</p>
+              </div>
               <div class="msg-sign">Aron</div>
             </div>
           </div>
         </div>
-        <div class="demo-cap" style="text-align:center; font-weight:400; font-style:italic; color:{INK_MUTE}; letter-spacing:0; margin-top:1rem;">A researched, personal draft - ready for you to review and send.</div>
+        <div class="demo-cap" style="text-transform:none; font-weight:400; font-style:italic; color:{INK_MUTE}; letter-spacing:0; margin-top:1.1rem;">A researched, personal draft - ready for you to review and send.</div>
         """,
         unsafe_allow_html=True,
     )
@@ -383,7 +475,10 @@ def render_group(label: str, note: str = "") -> None:
 
 
 def render_footer() -> None:
-    """Quiet footer: review disclaimer + 'Built by Aron Sarosi'."""
+    """Quiet footer, in canonical order across all four tools:
+    (1) the review disclaimer, (2) 'Built by Aron Sarosi', and (3) at the very
+    bottom, subtle Terms of Use / Privacy Policy links separated by a dot.
+    """
     st.markdown(
         """
         <div class="footer">
@@ -391,7 +486,26 @@ def render_footer() -> None:
           before sending, and check any contact details - the agent infers a likely
           person, it does not verify them.</p>
           <p class="built">Built by Aron Sarosi</p>
+          <div class="legal">
+            <a class="footlink" href="?page=terms" target="_blank">Terms of Use</a>
+            <span class="footsep">&middot;</span>
+            <a class="footlink" href="?page=privacy" target="_blank">Privacy Policy</a>
+          </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
+
+
+def render_legal_page(title: str, body_md: str) -> None:
+    """Render a standalone, themed legal page (Terms or Privacy) centred on the
+    warm-sand background, with a quiet link back to the app."""
+    _l, mid, _r = st.columns([1, 3, 1])
+    with mid:
+        st.markdown(f"<div class='policy-title'>{title}</div>", unsafe_allow_html=True)
+        st.markdown(
+            "<div style='margin-bottom:1.4rem;'>"
+            "<a class='policy-back' href='?'>&larr; Back to the app</a></div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(body_md)
